@@ -3,73 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psiripan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: psiripan <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/11 11:25:34 by psiripan          #+#    #+#             */
-/*   Updated: 2022/06/15 21:12:59 by psiripan         ###   ########.fr       */
+/*   Created: 2022/06/19 16:22:23 by psiripan          #+#    #+#             */
+/*   Updated: 2022/06/19 16:22:23 by psiripan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count(const char *str, char c)
+size_t	wordcount(const char *s, char c)
 {
-	int	i;
-	int	new;
+	size_t	count;
+	size_t	i;
 
+	count = 0;
 	i = 0;
-	new = 0;
-	while (*str)
+	while (s[i])
 	{
-		if (*str != c && new == 0)
+		if (s[i] != c)
 		{
-			new = 1;
-			i++;
+			count++;
+			while (s[i] != c && s[i])
+				i++;
 		}
-		else if (*str == c)
-			new = 0;
-		str++;
+		else if (s[i] == c)
+			i++;
 	}
-	return (i);
+	return (count);
 }
 
-static char	*getword(const char *str, int start, int finish)
+static char	*copyword(const char *s, char c)
 {
 	char	*word;
-	int		i;
+	size_t	len;
+	size_t	i;
 
 	i = 0;
-	word = malloc(sizeof(char) * (finish - start + 1));
-	while (start < finish)
-		word[i++] = str[start++];
-	word[i] = '\0';
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	word = (char *)malloc(sizeof(char) * (len + 1));
+	if (!word)
+		return (NULL);
+	while (i < len)
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[i] = 0;
 	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	i;
-	size_t	j;
-	int		index;
-	char	**str;
+	char	**ptr;
+	size_t	row;
+	size_t	index;
 
-	str = malloc(sizeof(char *) * (count(s, c) + 1));
-	if (!s || !str)
+	row = 0;
+	index = 0;
+	if (!s)
 		return (NULL);
-	i = 0;
-	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	ptr = (char **)malloc(sizeof(char *) * (wordcount(s, c) + 1));
+	if (!ptr)
+		return (NULL);
+	while (row < wordcount(s, c) && s[index])
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		if (s[index] != c)
 		{
-			str[j++] = getword(s, index, i);
-			index = -1;
+			ptr[row++] = copyword(&s[index], c);
+			while (s[index] != c && s[index])
+				index++;
 		}
-		i++;
+		else if (s[index] == c)
+			index++;
 	}
-	str[j] = 0;
-	return (str);
+	ptr[row] = 0;
+	return (ptr);
 }
