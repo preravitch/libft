@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psiripan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: psiripan <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 15:45:49 by psiripan          #+#    #+#             */
-/*   Updated: 2022/06/06 15:58:44 by psiripan         ###   ########.fr       */
+/*   Updated: 2022/06/19 21:13:56 by psiripan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	str1 = (unsigned char *)s1;
 	str2 = (unsigned char *)s2;
 	i = 0;
-	while (str1[i] && str1[i] == str2[i] && i < n)
+	while (str1[i] == str2[i] && i < n)
 		i++;
 	if (i == n)
 		return (0);
