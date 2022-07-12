@@ -6,7 +6,7 @@
 /*   By: psiripan <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 00:57:54 by psiripan          #+#    #+#             */
-/*   Updated: 2022/06/19 18:42:29 by psiripan         ###   ########.fr       */
+/*   Updated: 2022/07/12 14:00:54 by psiripan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	j;
-	char	*srcp;
 
-	srcp = (char *)src;
 	i = 0;
 	while (i < dstsize && *dst)
 	{
@@ -28,10 +26,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	if (i == dstsize)
 		return (i + ft_strlen(src));
 	j = 0;
-	while (srcp[j])
+	while (src[j])
 	{
 		if (j < dstsize - i - 1)
-			*dst++ = srcp[j];
+			*dst++ = src[j];
 		j++;
 	}
 	*dst = 0;

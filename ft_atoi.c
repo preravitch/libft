@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: psiripan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: psiripan <<marvin@42.fr>>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 18:01:37 by psiripan          #+#    #+#             */
-/*   Updated: 2022/06/07 14:25:11 by psiripan         ###   ########.fr       */
+/*   Updated: 2022/07/12 13:41:51 by psiripan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	ft_atoi(const char *str)
 	int	neg;
 	int	result;
 
-	if (!str)
-		return (0);
 	i = 0;
 	neg = 1;
 	result = 0;
